@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and push the Docker image
+      run: |
+        docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/chatwork-post-message:latest
+        docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/chatwork-post-message:latest
+    - name: Notice Chatwork
+      run: 
+        docker run --rm -e CW_TOKEN=${{ secrets.CHATWORK_TOKEN }} -e CW_ROOM_ID=${{ secrets.CHATWORK_ROOMID }} ${{ secrets.DOCKER_HUB_USERNAME }}/chatwork-post-message:latest _ "deploy success!"
