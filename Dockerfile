@@ -1,8 +1,5 @@
 FROM alpine:latest
 
-WORKDIR /bin
-
-ADD post_message.sh 
-RUN mv post_message.sh _
+ADD ./post_message.sh /bin/_
 
 RUN chmod a+x /bin/_
