@@ -17,4 +17,4 @@ jobs:
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/chatwork-post-message:latest
     - name: Notice Chatwork
       run: 
-        docker run --rm -e CW_TOKEN=${{ secrets.CHATWORK_TOKEN }} -e CW_ROOM_ID=${{ secrets.CHATWORK_ROOMID }} ${{ secrets.DOCKER_HUB_USERNAME }}/chatwork-post-message:latest _ "deploy success!"
+        docker run --rm -e CW_TOKEN=${{ secrets.CW_TOKEN }} -e CW_ROOM_ID=${{ secrets.CW_ROOM_ID }} ${{ secrets.DOCKER_HUB_USERNAME }}/chatwork-post-message:latest _ "deploy success!"
